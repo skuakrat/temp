@@ -1,0 +1,82 @@
+{% extends "en/layout.html" %}
+{% load static %}
+{% block body %}
+
+
+{% if user.is_authenticated %}
+
+<h2>Inventory Data </h2>
+
+<form class="mb-2">
+  <div class="form-row align-items-center">
+    <div class="col-auto">
+      <label for="keyword">Search:</label>
+    </div>
+    <div class="col-auto">
+      <input type="text" id="searchword" class="form-control mb-2">
+    </div>
+    <div class="col-auto">
+      <label for="drop">Search by:</label>
+    </div>
+    <div class="col-auto">
+    <select class="form-control mb-2" id="searchby">
+      <option>Name</option>
+      <option>Code</option>
+    </select>
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary mb-2" id="searchbutton">Search</button>
+    </div>
+  </div>
+</form>
+
+<div id="alert"></div>
+
+<div id="searchwordstore">All</div>
+<div id="searchbystore">Store</div>
+<h5 id="message">Search result for ''</h5>
+
+<div style="overflow-x:auto;">
+    <table class="table table-striped" id="resulttable">
+        <thead class="thead-dark">
+            <tr>
+                <th>Code</th>
+                <th>Picture</th>
+                <th>Name</th>
+                <th>Color</th>
+                <th>Shop</th>
+                <th>Factory</th>
+            </tr>
+        </thead>
+    </table>
+  </div>
+  <script src="{% static 'stock.js' %}"></script>
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+      <li class="page-item">
+      <span class="page-link" style="cursor:pointer;" id="prebutton">Previous</span>
+      </li>
+      <span id="pagebutton"></span>
+      <li class="page-item">
+          <span class="page-link" style="cursor:pointer;" id="nextbutton">Next</span>
+      </li>
+  </ul>
+</nav>
+
+
+
+{% else %}
+Please login to start using Warehouse. <a href="{% url 'login' %}">Log In</a>
+
+{% endif %}
+
+
+{% endblock %}
+
+
+
+
+
+
+
